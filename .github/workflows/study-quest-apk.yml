@@ -26,14 +26,16 @@ jobs:
         with:
           gradle-version: '8.9'
 
+    
       - name: Set up Android SDK
         uses: android-actions/setup-android@v3
-        with:
-          cmdline-tools-version: '11076708'
-          packages: |
-            platforms;android-35
-            build-tools;35.0.0
-          accept-android-sdk-licenses: true
+
+      - name: Accept Android SDK licenses
+        run: yes | sdkmanager --licenses
+
+      - name: Install Android SDK components
+        run: sdkmanager "platforms;android-35" "build-tools;35.0.0"
+        
 
       - name: Extract Android project
         run: unzip study_quest_android_project.zip -d project
